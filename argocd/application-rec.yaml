@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/JulienForestier/CESI-CI-CD-kubernetes.git'
-    targetRevision: main
+    targetRevision: rec
     path: overlays/rec
   destination:
     server: 'https://kubernetes.default.svc'
