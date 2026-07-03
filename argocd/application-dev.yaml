@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cesi-ci-cd-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/JulienForestier/CESI-CI-CD-kubernetes.git'
+    targetRevision: main
+    path: overlays/dev
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: CESI-CI-CD-DEV
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
