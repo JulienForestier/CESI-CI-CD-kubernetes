@@ -20,7 +20,7 @@ spec:
         - name: myapp
           image: ghcr.io/OWNER/REPO:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
             - name: ENV
               value: "dev"
