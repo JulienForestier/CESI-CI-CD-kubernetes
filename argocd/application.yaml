@@ -11,7 +11,7 @@ spec:
     path: overlays/prod
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: CESI-CI-CD-PROD
+    namespace: cesi-ci-cd-prod
   syncPolicy:
     automated:
       prune: true

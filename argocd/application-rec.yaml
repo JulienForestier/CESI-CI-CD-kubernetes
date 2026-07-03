@@ -11,7 +11,7 @@ spec:
     path: overlays/rec
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: CESI-CI-CD-REC
+    namespace: cesi-ci-cd-rec
   syncPolicy:
     automated:
       prune: true
