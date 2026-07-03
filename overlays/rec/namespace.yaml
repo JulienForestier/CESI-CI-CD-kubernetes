@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: CESI-CI-CD-REC
+  name: cesi-ci-cd-rec
