@@ -11,7 +11,7 @@ spec:
     path: overlays/dev
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: CESI-CI-CD-DEV
+    namespace: cesi-ci-cd-dev
   syncPolicy:
     automated:
       prune: true
