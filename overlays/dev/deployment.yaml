@@ -18,7 +18,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: myapp
-          image: ghcr.io/julienforestier/collector-shop:b9ae65c55c05
+          image: ghcr.io/julienforestier/collector-shop:041acf49f991
           ports:
             - containerPort: 3000
           env:
