@@ -19,3 +19,8 @@ patches:
         value:
           - name: ENV
             value: dev
+
+images:
+  - name: ghcr.io/OWNER/REPO
+    newName: ghcr.io/julienforestier/collector-shop
+    newTag: 8c18229
