@@ -3,6 +3,7 @@ resources:
   - namespace.yaml
   - ingress.yaml
   - ghcr-sealed-secret.yaml
+  - configmap.yaml
 
 namespace: cesi-ci-cd-rec
 
@@ -14,8 +15,3 @@ patches:
       - op: replace
         path: /spec/replicas
         value: 2
-      - op: add
-        path: /spec/template/spec/containers/0/env
-        value:
-          - name: ENV
-            value: recette
