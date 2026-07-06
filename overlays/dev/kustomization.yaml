@@ -23,6 +23,6 @@ patches:
 images:
 - name: ghcr.io/OWNER/REPO
   newName: ghcr.io/julienforestier/collector-shop
-  newTag: a3cffa0
+  newTag: b73e74c
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
