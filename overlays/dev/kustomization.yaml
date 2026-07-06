@@ -1,7 +1,21 @@
 resources:
+  - ../../base
   - namespace.yaml
-  - deployment.yaml
-  - service.yaml
   - ingress.yaml
   - ghcr-sealed-secret.yaml
-  - network-policy.yaml
+
+namespace: cesi-ci-cd-dev
+
+patches:
+  - target:
+      kind: Deployment
+      name: myapp
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: ENV
+            value: dev

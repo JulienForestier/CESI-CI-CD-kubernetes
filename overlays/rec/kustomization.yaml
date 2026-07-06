@@ -1,6 +1,20 @@
 resources:
+  - ../../base
   - namespace.yaml
-  - deployment.yaml
-  - service.yaml
   - ingress.yaml
-  - network-policy.yaml
+
+namespace: cesi-ci-cd-rec
+
+patches:
+  - target:
+      kind: Deployment
+      name: myapp
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: ENV
+            value: recette
