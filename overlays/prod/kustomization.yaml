@@ -2,6 +2,7 @@ resources:
   - ../../base
   - namespace.yaml
   - ingress.yaml
+  - ghcr-sealed-secret.yaml
 
 namespace: cesi-ci-cd-prod
 
