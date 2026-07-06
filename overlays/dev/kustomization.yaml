@@ -4,3 +4,4 @@ resources:
   - service.yaml
   - ingress.yaml
   - ghcr-sealed-secret.yaml
+  - network-policy.yaml

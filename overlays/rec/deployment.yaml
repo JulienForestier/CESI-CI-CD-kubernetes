@@ -14,11 +14,32 @@ spec:
       labels:
         app: myapp
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       containers:
         - name: myapp
           image: ghcr.io/OWNER/REPO:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
             - name: ENV
               value: "recette"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 20
