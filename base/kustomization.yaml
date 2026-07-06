@@ -2,7 +2,13 @@ resources:
   - deployment.yaml
   - service.yaml
   - network-policy.yaml
+  - api-deployment.yaml
+  - api-service.yaml
+  - api-network-policy.yaml
+  - postgres-cluster.yaml
 
 images:
   - name: ghcr.io/OWNER/REPO
+    newTag: latest
+  - name: ghcr.io/OWNER/API
     newTag: latest
