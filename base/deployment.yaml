@@ -15,8 +15,14 @@ spec:
       labels:
         app: myapp
     spec:
+      automountServiceAccountToken: false
       imagePullSecrets:
         - name: ghcr-pull-secret
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
       containers:
         - name: myapp
           image: ghcr.io/OWNER/REPO:latest
@@ -25,6 +31,19 @@ spec:
           envFrom:
             - configMapRef:
                 name: myapp-config
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seLinuxOptions: {}
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 50m
@@ -44,3 +63,6 @@ spec:
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 20
+      volumes:
+        - name: tmp
+          emptyDir: {}

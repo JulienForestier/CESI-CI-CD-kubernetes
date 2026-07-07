@@ -1,6 +1,10 @@
 name: Kubescape Security Scan
 on: [push, pull_request]
 
+permissions:
+  contents: read
+  security-events: write
+
 jobs:
   security-scan:
     runs-on: ubuntu-24.04
