@@ -53,6 +53,11 @@ spec:
                   key: password
             - name: ConnectionStrings__collectorshop
               value: "Host=$(DB_HOST);Port=$(DB_PORT);Database=$(DB_NAME);Username=$(DB_USER);Password=$(DB_PASSWORD)"
+            - name: Jwt__Key
+              valueFrom:
+                secretKeyRef:
+                  name: collectorshop-jwt
+                  key: Jwt__Key
           resources:
             requests:
               cpu: 50m

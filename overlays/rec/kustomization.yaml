@@ -4,6 +4,7 @@ resources:
   - ingress.yaml
   - ghcr-sealed-secret.yaml
   - configmap.yaml
+  - jwt-sealed-secret.yaml
 
 namespace: cesi-ci-cd-rec
 
