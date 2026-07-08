@@ -55,6 +55,37 @@ kubeseal --format yaml --controller-name=sealed-secrets-controller --controller-
   > overlays/<env>/ghcr-sealed-secret.yaml
 ```
 
+Le BFF (`CESI-CI-CD.ApiService`) et l'IdentityServer (`CESI-CI-CD.IdentityService`) ont besoin de deux secrets scellés supplémentaires, un par namespace dev/rec/prod — **pas encore créés** (nécessitent un accès au cluster réel pour `kubeseal`), donc `identity-deployment.yaml`/`api-deployment.yaml` échoueront à démarrer tant qu'ils ne le sont pas :
+
+```bash
+# 1. Secret du client OAuth confidentiel "collector-shop-bff" (partagé entre apiservice et
+#    identityservice — même valeur des deux côtés, sinon l'échange de code d'autorisation échoue)
+BFF_SECRET=$(openssl rand -base64 32)
+kubectl create secret generic collectorshop-bff \
+  --from-literal=Bff__ClientSecret="$BFF_SECRET" \
+  -n <namespace> --dry-run=client -o yaml | \
+kubeseal --format yaml --controller-name=sealed-secrets-controller --controller-namespace=kube-system \
+  > overlays/<env>/bff-sealed-secret.yaml
+
+# 2. Certificat de signature RSA de l'IdentityServer (voir LoadOrCreateSigningCertificate dans
+#    CESI-CI-CD.IdentityService/Program.cs) — sans lui, un certificat éphémère est régénéré à
+#    chaque redémarrage du pod, invalidant tous les tokens/sessions en cours.
+CERT_PASSWORD=$(openssl rand -base64 24)
+openssl req -x509 -newkey rsa:2048 -keyout /tmp/identity-signing.key -out /tmp/identity-signing.crt \
+  -days 730 -nodes -subj "/CN=collector-shop-identity"
+openssl pkcs12 -export -out /tmp/identity-signing.pfx \
+  -inkey /tmp/identity-signing.key -in /tmp/identity-signing.crt -password "pass:$CERT_PASSWORD"
+kubectl create secret generic collectorshop-identity-signing \
+  --from-literal=IdentityServer__SigningCertificate="$(base64 -i /tmp/identity-signing.pfx | tr -d '\n')" \
+  --from-literal=IdentityServer__SigningCertificatePassword="$CERT_PASSWORD" \
+  -n <namespace> --dry-run=client -o yaml | \
+kubeseal --format yaml --controller-name=sealed-secrets-controller --controller-namespace=kube-system \
+  > overlays/<env>/identity-signing-sealed-secret.yaml
+rm /tmp/identity-signing.key /tmp/identity-signing.crt /tmp/identity-signing.pfx
+```
+
+Une fois ces deux fichiers créés pour un overlay, les ajouter à `resources:` dans son `kustomization.yaml`, puis câbler `Bff__ClientSecret`/`IdentityService__Authority` dans `base/api-deployment.yaml` (délibérément pas encore fait — apiservice est actuellement en prod avec l'ancienne auth JWT, câbler ces secrets avant qu'ils existent casserait son déploiement).
+
 ### 4. cert-manager
 ```bash
 helm repo add jetstack https://charts.jetstack.io

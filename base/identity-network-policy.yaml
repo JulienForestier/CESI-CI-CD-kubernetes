@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: identityservice-allow-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: identityservice
+  policyTypes:
+    - Ingress
+  ingress:
+    # Traefik : pages login/register et endpoints OIDC atteints depuis le navigateur.
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: TCP
+          port: 8080
+    # apiservice : appels back-channel (PAR, token, userinfo, discovery) via l'URL interne au
+    # cluster — voir IdentityService__Authority dans api-deployment.yaml.
+    - from:
+        - podSelector:
+            matchLabels:
+              app: apiservice
+      ports:
+        - protocol: TCP
+          port: 8080

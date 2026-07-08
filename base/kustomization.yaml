@@ -5,6 +5,9 @@ resources:
   - api-deployment.yaml
   - api-service.yaml
   - api-network-policy.yaml
+  - identity-deployment.yaml
+  - identity-service.yaml
+  - identity-network-policy.yaml
   - postgres-cluster.yaml
   - middleware-redirect-https.yaml
 
@@ -12,4 +15,6 @@ images:
   - name: ghcr.io/OWNER/REPO
     newTag: latest
   - name: ghcr.io/OWNER/API
+    newTag: latest
+  - name: ghcr.io/OWNER/IDENTITY
     newTag: latest

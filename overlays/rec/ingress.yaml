@@ -22,6 +22,48 @@ spec:
                 name: apiservice
                 port:
                   number: 80
+          - path: /connect
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
+          - path: /.well-known
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
+          - path: /account
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
+          - path: /register
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
+          - path: /identity-assets
+            pathType: Prefix
+            backend:
+              service:
+                name: identityservice
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:

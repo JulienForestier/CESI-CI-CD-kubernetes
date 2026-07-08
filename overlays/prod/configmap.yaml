@@ -5,3 +5,5 @@ metadata:
 data:
   ENV: prod
   ASPNETCORE_ENVIRONMENT: Production
+  Bff__Origin: "https://julienforestier.pro"
+  IdentityServer__IssuerUri: "https://julienforestier.pro"

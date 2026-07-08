@@ -5,3 +5,5 @@ metadata:
 data:
   ENV: dev
   ASPNETCORE_ENVIRONMENT: Development
+  Bff__Origin: "https://dev.julienforestier.pro"
+  IdentityServer__IssuerUri: "https://dev.julienforestier.pro"

@@ -5,3 +5,5 @@ metadata:
 data:
   ENV: recette
   ASPNETCORE_ENVIRONMENT: Staging
+  Bff__Origin: "https://rec.julienforestier.pro"
+  IdentityServer__IssuerUri: "https://rec.julienforestier.pro"
