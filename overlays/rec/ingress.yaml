@@ -29,6 +29,20 @@ spec:
                 name: apiservice
                 port:
                   number: 80
+          - path: /signin-oidc
+            pathType: Prefix
+            backend:
+              service:
+                name: apiservice
+                port:
+                  number: 80
+          - path: /signout-callback-oidc
+            pathType: Prefix
+            backend:
+              service:
+                name: apiservice
+                port:
+                  number: 80
           - path: /connect
             pathType: Prefix
             backend:
