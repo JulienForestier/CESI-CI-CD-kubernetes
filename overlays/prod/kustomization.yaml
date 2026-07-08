@@ -1,25 +1,34 @@
 resources:
-  - ../../base
-  - namespace.yaml
-  - ingress.yaml
-  - ghcr-sealed-secret.yaml
-  - configmap.yaml
-  - jwt-sealed-secret.yaml
+- ../../base
+- namespace.yaml
+- ingress.yaml
+- ghcr-sealed-secret.yaml
+- configmap.yaml
+- jwt-sealed-secret.yaml
 
 namespace: cesi-ci-cd-prod
 
 patches:
-  - target:
-      kind: Deployment
-      name: myapp
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 3
-  - target:
-      kind: Cluster
-      name: collectorshop-db
-    patch: |-
-      - op: replace
-        path: /spec/instances
-        value: 2
+- patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 3
+  target:
+    kind: Deployment
+    name: myapp
+- patch: |-
+    - op: replace
+      path: /spec/instances
+      value: 2
+  target:
+    kind: Cluster
+    name: collectorshop-db
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/OWNER/API
+  newName: ghcr.io/julienforestier/collector-shop-api
+  newTag: a51b8c2
+- name: ghcr.io/OWNER/REPO
+  newName: ghcr.io/julienforestier/collector-shop
+  newTag: a51b8c2
