@@ -23,10 +23,10 @@ kind: Kustomization
 images:
 - name: ghcr.io/OWNER/API
   newName: ghcr.io/julienforestier/collector-shop-api
-  newTag: 1.1.1
+  newTag: 1.1.2
 - name: ghcr.io/OWNER/IDENTITY
   newName: ghcr.io/julienforestier/collector-shop-identity
-  newTag: 1.1.1
+  newTag: 1.1.2
 - name: ghcr.io/OWNER/REPO
   newName: ghcr.io/julienforestier/collector-shop
-  newTag: 1.1.1
+  newTag: 1.1.2
