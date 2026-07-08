@@ -23,7 +23,7 @@ patches:
 images:
 - name: ghcr.io/OWNER/API
   newName: ghcr.io/julienforestier/collector-shop-api
-  newTag: 1f334ff
+  newTag: d56f193
 - name: ghcr.io/OWNER/REPO
   newName: ghcr.io/julienforestier/collector-shop
-  newTag: 1f334ff
+  newTag: d56f193
