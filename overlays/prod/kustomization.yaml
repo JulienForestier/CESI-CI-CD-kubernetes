@@ -30,10 +30,10 @@ kind: Kustomization
 images:
 - name: ghcr.io/OWNER/API
   newName: ghcr.io/julienforestier/collector-shop-api
-  newTag: 9df8510
+  newTag: e7d4cca
 - name: ghcr.io/OWNER/IDENTITY
   newName: ghcr.io/julienforestier/collector-shop-identity
-  newTag: 9df8510
+  newTag: e7d4cca
 - name: ghcr.io/OWNER/REPO
   newName: ghcr.io/julienforestier/collector-shop
-  newTag: 9df8510
+  newTag: e7d4cca
