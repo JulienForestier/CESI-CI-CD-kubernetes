@@ -6,6 +6,7 @@ resources:
   - api-service.yaml
   - api-network-policy.yaml
   - postgres-cluster.yaml
+  - middleware-redirect-https.yaml
 
 images:
   - name: ghcr.io/OWNER/REPO
