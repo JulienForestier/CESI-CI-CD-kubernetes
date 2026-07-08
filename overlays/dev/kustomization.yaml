@@ -25,10 +25,10 @@ patches:
 images:
 - name: ghcr.io/OWNER/API
   newName: ghcr.io/julienforestier/collector-shop-api
-  newTag: 3003ff6
+  newTag: 8a43af5
 - name: ghcr.io/OWNER/IDENTITY
   newName: ghcr.io/julienforestier/collector-shop-identity
-  newTag: 3003ff6
+  newTag: 8a43af5
 - name: ghcr.io/OWNER/REPO
   newName: ghcr.io/julienforestier/collector-shop
-  newTag: 3003ff6
+  newTag: 8a43af5
