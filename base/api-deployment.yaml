@@ -72,11 +72,23 @@ spec:
                   key: password
             - name: ConnectionStrings__collectorshop
               value: "Host=$(DB_HOST);Port=$(DB_PORT);Database=$(DB_NAME);Username=$(DB_USER);Password=$(DB_PASSWORD)"
+            # Jwt__Key : conservé le temps que le nouveau build (OIDC/BFF) soit effectivement
+            # déployé — l'ancienne image encore en place à l'écriture de ce commit en a toujours
+            # besoin. À retirer, avec le SealedSecret collectorshop-jwt, une fois le rollout confirmé.
             - name: Jwt__Key
               valueFrom:
                 secretKeyRef:
                   name: collectorshop-jwt
                   key: Jwt__Key
+            # URL interne au cluster (même namespace) — atteinte directement, plus rapide et sans
+            # saut par l'ingress public que pour les requêtes venant du navigateur.
+            - name: IdentityService__Authority
+              value: "http://identityservice"
+            - name: Bff__ClientSecret
+              valueFrom:
+                secretKeyRef:
+                  name: collectorshop-bff
+                  key: Bff__ClientSecret
           resources:
             requests:
               cpu: 50m

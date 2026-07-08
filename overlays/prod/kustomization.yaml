@@ -5,6 +5,8 @@ resources:
 - ghcr-sealed-secret.yaml
 - configmap.yaml
 - jwt-sealed-secret.yaml
+- bff-sealed-secret.yaml
+- identity-signing-sealed-secret.yaml
 
 namespace: cesi-ci-cd-prod
 
